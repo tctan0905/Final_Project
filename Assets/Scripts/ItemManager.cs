@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Items : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,15 @@ public class Items : MonoBehaviour
     {
         
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
+            Debug.Log("Collsion");
+        }
+    }
+   
 }
