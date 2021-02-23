@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 VerticalMovement;
     private Vector3 HorizontalMovement;
     private float speed = 10.0f;
+    public Rigidbody rb;
 
     int bombCount = 0;
     public Text bomb;
@@ -20,10 +21,18 @@ public class PlayerController : MonoBehaviour
     public BombController bombController;
     public Transform fireThrown;
     public float speedBomb;
+
+    public Button attack;
+    public Button thronwBomb;
+    public Button Jump;
+
+    private BombPrefab _bomb;
+
     private void Start()
     {
         bomb.text = bombCount.ToString();
         isBomb = true;
+        rb = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
@@ -43,38 +52,47 @@ public class PlayerController : MonoBehaviour
         transform.localPosition += VerticalMovement * Time.fixedDeltaTime;
         transform.localPosition += HorizontalMovement * Time.fixedDeltaTime;
 
-        
+        ////Move?
+        //transform.localPosition += transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") ;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (isBomb)
-            {
-                if(bombCount > 0)
-                {
-                    bombCount--;
-                    bomb.text = bombCount.ToString();
-                    BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
-                    newBomb.speedBullet = speedBomb;
-                    isBomb = false;
-                }
-                else
-                {
-                    bombCount = 0;
-                    bomb.text = bombCount.ToString();
-                    isBomb = true;
-                }
+            Debug.Log("Fire");
+            //try
+            _bomb = DataManager.Instance.GetBombPrefab();
+            _bomb.bombPrefab.transform.position = transform.position + 2 * transform.forward; 
+            _bomb.rigidbody.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            _bomb.bombPrefab.SetActive(true);
+
+
+            //if (isBomb)
+            //{
+            //    if(bombCount > 0)
+            //    {
+            //        bombCount--;
+            //        bomb.text = bombCount.ToString();
+            //        BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
+            //        newBomb.speedBullet = speedBomb;
+            //        isBomb = false;
+            //    }
+            //    else
+            //    {
+            //        bombCount = 0;
+            //        bomb.text = bombCount.ToString();
+            //        isBomb = true;
+            //    }
                     
                
-            }
+            //}
             
         }
-        if(Input.GetKeyUp(KeyCode.Space))
-        {
-            isBomb = true;
-        }
+        //if(Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    isBomb = true;
+        //}
         
        
     }
@@ -87,6 +105,43 @@ public class PlayerController : MonoBehaviour
             bomb.text = bombCount.ToString();
         }
     }
-    
-     
+
+
+    public void Player_ThrownBomb()
+    {
+        
+            if (isBomb)
+            {
+                if (bombCount > 0)
+                {
+
+                    bombCount--;
+                    bomb.text = bombCount.ToString();
+                    BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
+                    newBomb.speedBullet = speedBomb;
+                    isBomb = false;
+                }
+                else
+                {
+                    bombCount = 0;
+                    bomb.text = bombCount.ToString();
+                    isBomb = true;
+                }
+
+
+            }
+        isBomb = true;
+        
+        
+    }
+
+    public void Player_Attack()
+    {
+        
+    }
+    public void Player_Jump()
+    {
+        rb.AddForce(Vector3.up * 200.0f);
+    }
+
 }

@@ -41,7 +41,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
             yield return null;
         }
 
-      
     }
   
 }

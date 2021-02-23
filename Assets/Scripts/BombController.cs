@@ -14,28 +14,41 @@ public class BombController : MonoBehaviour
     public float boombThrowingForce = 5f;
 
     private bool holdingBoomb = true;
+    private int _count;
 
 
     void Start()
     {
-        boomb.GetComponent<Rigidbody>().useGravity = false;
+        //boomb.GetComponent<Rigidbody>().useGravity = true;
+        
     }
     // Update is called once per frame
     void Update()
     {
-        if(holdingBoomb)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                holdingBoomb = false;
-                boomb.GetComponent<Rigidbody>().useGravity = true;
-                boomb.GetComponent<Rigidbody>().AddForce(transform.forward*200f);
-            }
-        }
-        timeLife -= Time.deltaTime;
-        if (timeLife < 0)
-        {
-            Destroy(gameObject);
-        }
+        //if(holdingBoomb)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        holdingBoomb = false;
+        //        boomb.GetComponent<Rigidbody>().useGravity = true;
+        //        boomb.GetComponent<Rigidbody>().AddForce(transform.forward*200f);
+        //    }
+        //}
+        //timeLife -= Time.deltaTime;
+        //if (timeLife < 0)
+        //{
+        //    Destroy(gameObject);
+        //}
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("Enable");
+        StartCoroutine(Explose());
+    }
+
+    IEnumerator Explose() {
+        yield return new WaitForSeconds(2f);
+        transform.gameObject.SetActive(false);
     }
 }
