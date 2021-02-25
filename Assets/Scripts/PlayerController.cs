@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public Button thronwBomb;
     public Button Jump;
 
+
     private BombPrefab _bomb;
 
     private void Start()
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
             //try
             _bomb = DataManager.Instance.GetBombPrefab();
             _bomb.bombPrefab.transform.position = transform.position + 2 * transform.forward; 
-            _bomb.rigidbody.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            _bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
             _bomb.bombPrefab.SetActive(true);
 
 
