@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
 
     public BombController bombController;
+    public GameObject bombControllertest;
     public Transform fireThrown;
     public float speedBomb;
 
@@ -63,10 +64,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Fire");
             //try
-            _bomb = DataManager.Instance.GetBombPrefab();
-            _bomb.bombPrefab.transform.position = transform.position + 2 * transform.forward; 
-            _bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
-            _bomb.bombPrefab.SetActive(true);
+            //_bomb = DataManager.Instance.GetBombPrefab();
+            //_bomb.bombPrefab.transform.position = transform.position + 2 * transform.up; 
+            //_bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
+            //_bomb.bombPrefab.SetActive(true);
+
 
 
             //if (isBomb)
@@ -74,10 +76,10 @@ public class PlayerController : MonoBehaviour
             //    if(bombCount > 0)
             //    {
             //        bombCount--;
-            //        bomb.text = bombCount.ToString();
-            //        BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
-            //        newBomb.speedBullet = speedBomb;
-            //        isBomb = false;
+            bomb.text = bombCount.ToString();
+            GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
+            newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+            isBomb = false;
             //    }
             //    else
             //    {
@@ -85,17 +87,17 @@ public class PlayerController : MonoBehaviour
             //        bomb.text = bombCount.ToString();
             //        isBomb = true;
             //    }
-                    
-               
+
+
             //}
-            
+
         }
-        //if(Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    isBomb = true;
-        //}
-        
-       
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isBomb = true;
+        }
+
+
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -110,30 +112,36 @@ public class PlayerController : MonoBehaviour
 
     public void Player_ThrownBomb()
     {
-        
-            if (isBomb)
-            {
-                if (bombCount > 0)
-                {
 
-                    bombCount--;
-                    bomb.text = bombCount.ToString();
-                    BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
-                    newBomb.speedBullet = speedBomb;
-                    isBomb = false;
-                }
-                else
-                {
-                    bombCount = 0;
-                    bomb.text = bombCount.ToString();
-                    isBomb = true;
-                }
+        //    if (isBomb)
+        //    {
+        //        if (bombCount > 0)
+        //        {
+
+        //            bombCount--;
+        //            bomb.text = bombCount.ToString();
+        //            BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
+        //            newBomb.speedBullet = speedBomb;
+        //            isBomb = false;
+        //        }
+        //        else
+        //        {
+        //            bombCount = 0;
+        //            bomb.text = bombCount.ToString();
+        //            isBomb = true;
+        //        }
 
 
-            }
-        isBomb = true;
+        //    }
+        //isBomb = true;
+        Debug.Log("Fire");
+        //try
+        _bomb = DataManager.Instance.GetBombPrefab();
+        _bomb.bombPrefab.transform.position = fireThrown.forward + transform.position;
+        _bomb.rigidbody.AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+        _bomb.bombPrefab.SetActive(true);
         
-        
+
     }
 
     public void Player_Attack()

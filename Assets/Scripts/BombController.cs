@@ -25,20 +25,7 @@ public class BombController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(holdingBoomb)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        holdingBoomb = false;
-        //        boomb.GetComponent<Rigidbody>().useGravity = true;
-        //        boomb.GetComponent<Rigidbody>().AddForce(transform.forward*200f);
-        //    }
-        //}
-        //timeLife -= Time.deltaTime;
-        //if (timeLife < 0)
-        //{
-        //    Destroy(gameObject);
-        //}
+   
     }
 
     private void OnEnable()
@@ -48,7 +35,7 @@ public class BombController : MonoBehaviour
     }
 
     IEnumerator Explose() {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         transform.gameObject.SetActive(false);
     }
 }
