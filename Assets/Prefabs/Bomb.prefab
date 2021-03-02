@@ -107,12 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd7218f540744654c8a6b6bcc759c43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedBullet: 50
-  timeLife: 5
-  test: {fileID: 8369845500124778137}
-  boomb: {fileID: 0}
-  bombDistance: 10
-  boombThrowingForce: 15
+  explosionEffect: {fileID: 2143248968754809469, guid: 163062642aeaa4344bfaea766505928e,
+    type: 3}
+  delay: 3
+  explosionForece: 10
+  radius: 20
 --- !u!54 &8369845500124778137
 Rigidbody:
   m_ObjectHideFlags: 0
