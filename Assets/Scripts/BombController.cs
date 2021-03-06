@@ -7,22 +7,15 @@ public class BombController : MonoBehaviour
 {
 
     public GameObject explosionEffect;
-    public float delay = 3f;
+    public float delay = 5f;
     public float explosionForece = 10f;
     public float radius = 20f;
-
+    
 
     void Start()
     {
-
         Invoke("Explosion", delay);
     }
-    // Update is called once per frame
-    void Update()
-    {
-   
-    }
-
     private void Explosion()
     {
         Collider[] collider = Physics.OverlapSphere(transform.position, radius);
@@ -37,16 +30,16 @@ public class BombController : MonoBehaviour
             }
         }
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
-    private void OnEnable()
+    void OnEnable()
     {
-        Debug.Log("Enable");
         StartCoroutine(Explose());
     }
 
-    IEnumerator Explose() {
-        yield return new WaitForSeconds(5f);
+    IEnumerator Explose()
+    {
+        yield return new WaitForSeconds(3f);
         transform.gameObject.SetActive(false);
     }
+    
 }

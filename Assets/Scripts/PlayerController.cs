@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             //    if(bombCount > 0)
             //    {
             //        bombCount--;
-            bomb.text = bombCount.ToString();
+            //bomb.text = bombCount.ToString();
             GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
             isBomb = false;
@@ -139,9 +139,10 @@ public class PlayerController : MonoBehaviour
         _bomb = DataManager.Instance.GetBombPrefab();
         _bomb.bombPrefab.transform.position = fireThrown.forward + transform.position;
         _bomb.rigidbody.AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-        _bomb.bombPrefab.SetActive(true);
         
+        _bomb.bombPrefab.SetActive(true);
 
+        _bomb.rigidbody.isKinematic = false;
     }
 
     public void Player_Attack()
