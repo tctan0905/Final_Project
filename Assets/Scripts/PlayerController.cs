@@ -138,11 +138,9 @@ public class PlayerController : MonoBehaviour
         //try
         _bomb = DataManager.Instance.GetBombPrefab();
         _bomb.bombPrefab.transform.position = fireThrown.forward + transform.position;
-        _bomb.rigidbody.AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-        
-        _bomb.bombPrefab.SetActive(true);
-
         _bomb.rigidbody.isKinematic = false;
+        _bomb.rigidbody.AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+        _bomb.bombPrefab.SetActive(true);
     }
 
     public void Player_Attack()

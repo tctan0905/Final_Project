@@ -40,6 +40,7 @@ public class BombController : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         transform.gameObject.SetActive(false);
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
-    
+
 }
