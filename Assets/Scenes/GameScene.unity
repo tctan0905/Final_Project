@@ -8464,7 +8464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6d1b873c9879640966f48182b6527e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 5
+  totalTime: 12
   text: {fileID: 1045758653}
   useTimerEvent: 1
   TimerEvent:
