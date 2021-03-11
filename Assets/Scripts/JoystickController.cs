@@ -9,13 +9,24 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
     public Transform player;
     Vector3 move;
     public float moveSpeed;
-
+    public GameObject soldier;
+    Animator animator;
+    void Start()
+    {
+        animator = soldier.GetComponent<Animator>();
+        
+    }
+    void Update ()
+    {
+        
+    }
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
         transform.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.5f);
 
         move = new Vector3(transform.localPosition.x, 0, transform.localPosition.y).normalized;
+      
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -23,6 +34,7 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
         transform.localPosition = Vector3.zero;
         move = Vector3.zero;
         StopCoroutine("PlayerMove");
+        animator.SetBool("isMoved",false);
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -36,8 +48,12 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
             if(move != Vector3.zero)
             {
                 player.rotation = Quaternion.Slerp(player.rotation, Quaternion.LookRotation(move), 5 * Time.deltaTime);
+                animator.SetBool("isMoved",true);
             }
-
+            else
+            {
+                animator.SetBool("isMoved",false);
+            }
             yield return null;
         }
 
