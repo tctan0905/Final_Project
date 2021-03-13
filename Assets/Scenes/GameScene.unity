@@ -915,7 +915,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &193197938 stripped
 Transform:
@@ -937,6 +937,28 @@ CapsuleCollider:
   m_Height: 1.67
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &193197940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193197935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41431f6f929f2471d88dc1f0a6afcd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rb: {fileID: 193197936}
+  bomb: {fileID: 1528521149}
+  bombController: {fileID: 1040393911141939792, guid: 6e337d36186391e48b40b9fced92f884,
+    type: 3}
+  bombControllertest: {fileID: 3999695434503863480, guid: 6e337d36186391e48b40b9fced92f884,
+    type: 3}
+  soldier: {fileID: 193197935}
+  fireThrown: {fileID: 2027261137}
+  speedBomb: 10
 --- !u!4 &199313924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4179240027576528, guid: 86ca6560575669f47bb9427d4e937af0,
@@ -2335,13 +2357,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393815404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41431f6f929f2471d88dc1f0a6afcd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rb: {fileID: 0}
+  rb: {fileID: 193197936}
   bomb: {fileID: 1528521149}
   bombController: {fileID: 1040393911141939792, guid: 6e337d36186391e48b40b9fced92f884,
     type: 3}
@@ -2350,9 +2372,6 @@ MonoBehaviour:
   soldier: {fileID: 193197935}
   fireThrown: {fileID: 2027261137}
   speedBomb: 10
-  attack: {fileID: 95259174}
-  thronwBomb: {fileID: 1126876549}
-  Jump: {fileID: 770048445}
 --- !u!1001 &413327365
 PrefabInstance:
   m_ObjectHideFlags: 0

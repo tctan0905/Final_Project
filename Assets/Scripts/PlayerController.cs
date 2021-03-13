@@ -24,9 +24,7 @@ public class PlayerController : MonoBehaviour
     public Transform fireThrown;
     public float speedBomb;
 
-    public Button attack;
-    public Button thronwBomb;
-    public Button Jump;
+    
     
 
     private BombPrefab _bomb;
