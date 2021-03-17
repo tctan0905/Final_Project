@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public Transform fireThrown;
     public float speedBomb;
 
-    
+    public int heath;
     
 
     private BombPrefab _bomb;
@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         isBomb = true;
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
+        heath = 100;
     }
     private void FixedUpdate()
     {
@@ -161,6 +162,9 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Vector3.up * 200.0f);
     }
 
-    
+    public void TakeDamage(int damge)
+    {
+        heath -= damge;
+    }
 
 }

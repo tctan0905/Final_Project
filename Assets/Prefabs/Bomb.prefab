@@ -112,6 +112,7 @@ MonoBehaviour:
   delay: 3
   explosionForece: 10
   radius: 20
+  DamagetoGive: 20
 --- !u!54 &8369845500124778137
 Rigidbody:
   m_ObjectHideFlags: 0

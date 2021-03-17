@@ -10,7 +10,7 @@ public class BombController : MonoBehaviour
     public float delay = 5f;
     public float explosionForece = 10f;
     public float radius = 20f;
-    
+    public int DamagetoGive;
 
     void Start()
     {
@@ -27,6 +27,7 @@ public class BombController : MonoBehaviour
             if (rig != null)
             {
                 rig.AddExplosionForce(explosionForece, transform.position, radius, 1, ForceMode.Impulse);
+                
             }
         }
         Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -42,5 +43,11 @@ public class BombController : MonoBehaviour
         transform.gameObject.SetActive(false);
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
-
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerController>().TakeDamage(DamagetoGive);
+        }
+    }
 }
