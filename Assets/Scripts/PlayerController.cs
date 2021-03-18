@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 HorizontalMovement;
     public float speed = 10.0f;
     public Rigidbody rb;
-
+    public bool isThrow;
     int bombCount = 0;
     public Text bomb;
 
-    private bool isBomb;
+    private float countExplode = 3f;
+    [SerializeField]
+    public float _timeAttack = 3f;
+    private float _nextTimeAttack;
 
 
     public BombController bombController;
@@ -25,18 +28,19 @@ public class PlayerController : MonoBehaviour
     public float speedBomb;
 
     public int heath;
-    
+
 
     private BombPrefab _bomb;
 
     // Animator controller
     Animator animator;
-    
+
 
     private void Start()
     {
+        isThrow = true;
+        _nextTimeAttack = Time.time;
         bomb.text = bombCount.ToString();
-        isBomb = true;
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
@@ -65,48 +69,47 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Fire");
-            //try
-            //_bomb = DataManager.Instance.GetBombPrefab();
-            //_bomb.bombPrefab.transform.position = transform.position + 2 * transform.up; 
-            //_bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
-            //_bomb.bombPrefab.SetActive(true);
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Debug.Log("Fire");
+        //    //try
+        //    //_bomb = DataManager.Instance.GetBombPrefab();
+        //    //_bomb.bombPrefab.transform.position = transform.position + 2 * transform.up; 
+        //    //_bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
+        //    //_bomb.bombPrefab.SetActive(true);
 
 
 
-            //if (isBomb)
-            //{
-            //    if(bombCount > 0)
-            //    {
-            //        bombCount--;
-            //bomb.text = bombCount.ToString();
-            GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
-            newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-            isBomb = false;
-            //    }
-            //    else
-            //    {
-            //        bombCount = 0;
-            //        bomb.text = bombCount.ToString();
-            //        isBomb = true;
-            //    }
+        //    //if (isBomb)
+        //    //{
+        //    //    if(bombCount > 0)
+        //    //    {
+        //    //        bombCount--;
+        //    //bomb.text = bombCount.ToString();
+        //    GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
+        //    newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+        //    isBomb = false;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        bombCount = 0;
+        //    //        bomb.text = bombCount.ToString();
+        //    //        isBomb = true;
+        //    //    }
 
 
-            //}
+        //    //}
 
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isBomb = true;
-        }
+        //}
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    isBomb = true;
+        //}
 
 
     }
     void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.tag == "Items")
         {
             bombCount++;
@@ -117,12 +120,21 @@ public class PlayerController : MonoBehaviour
 
     public void Player_ThrownBomb()
     {
-        GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
-        newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-        isBomb = false;
-        animator.SetTrigger("isThrowed");
-        Debug.Log("throwed");
+        if (_nextTimeAttack < Time.time)
+        {
+            GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
+            newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+            countExplode -= Time.deltaTime;
+            _nextTimeAttack += _timeAttack;
+
+            animator.SetTrigger("isThrowed");
+            isThrow = false;
+            Debug.Log("throwed");
+            StartCoroutine("CheckisBomb");
+            Debug.Log("Fire");
+        }
         
+
         //    if (isBomb)
         //    {
         //        if (bombCount > 0)
@@ -144,7 +156,6 @@ public class PlayerController : MonoBehaviour
 
         //    }
         //isBomb = true;
-        Debug.Log("Fire");
         //try
         // _bomb = DataManager.Instance.GetBombPrefab();
         // _bomb.bombPrefab.transform.position = fireThrown.position + transform.position;
@@ -155,16 +166,19 @@ public class PlayerController : MonoBehaviour
 
     public void Player_Attack()
     {
-        
+
     }
     public void Player_Jump()
     {
-        rb.AddForce(Vector3.up * 200.0f);
+        rb.AddForce(Vector3.up * 500.0f);
     }
 
     public void TakeDamage(int damge)
     {
         heath -= damge;
     }
-
+    //IEnumerable CheckisBomb()
+    //{
+    //    yield return new WaitForSeconds(3f);
+    //}
 }
