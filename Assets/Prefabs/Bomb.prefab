@@ -111,7 +111,7 @@ MonoBehaviour:
     type: 3}
   delay: 3
   explosionForece: 10
-  radius: 20
+  radius: 5
   DamagetoGive: 20
 --- !u!54 &8369845500124778137
 Rigidbody:

@@ -19,8 +19,9 @@ public class BombController : MonoBehaviour
     private void Explosion()
     {
         Collider[] collider = Physics.OverlapSphere(transform.position, radius);
+        Instantiate(explosionEffect, transform.position, transform.rotation);
 
-        foreach(Collider near in collider)
+        foreach (Collider near in collider)
         {
             Rigidbody rig = near.GetComponent<Rigidbody>();
 
@@ -29,8 +30,14 @@ public class BombController : MonoBehaviour
                 rig.AddExplosionForce(explosionForece, transform.position, radius, 1, ForceMode.Impulse);
                 
             }
+            PlayerController playerDamage = near.GetComponent<PlayerController>();
+            if(playerDamage != null)
+            {
+                playerDamage.heath -= 20;
+            }
         }
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+         
+
     }
     void OnEnable()
     {
@@ -43,11 +50,5 @@ public class BombController : MonoBehaviour
         transform.gameObject.SetActive(false);
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
-    public void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.GetComponent<PlayerController>().TakeDamage(DamagetoGive);
-        }
-    }
+    
 }
