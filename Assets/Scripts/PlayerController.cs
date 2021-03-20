@@ -11,14 +11,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 HorizontalMovement;
     public float speed = 10.0f;
     public Rigidbody rb;
-    public bool isThrow;
     int bombCount = 0;
     public Text bomb;
 
-    private float countExplode = 3f;
     [SerializeField]
-    public float _timeAttack = 3f;
+    private float _timeAttack = 3f;
     private float _nextTimeAttack;
+    private float _timeJump = 1.5f;
+    private float _nextTimeJump;
 
 
     public BombController bombController;
@@ -38,14 +38,14 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        isThrow = true;
         _nextTimeAttack = Time.time;
+        _nextTimeJump = Time.time;
         bomb.text = bombCount.ToString();
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
     }
-    private void FixedUpdate()
+    private void fixedUpate()
     {
         //get movement input from user
         v = Input.GetAxisRaw("Vertical");
@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
         //transform.localPosition += transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") ;
     }
 
-    void Update()
-    {
+   // void Update()
+    //{
         //if(Input.GetKeyDown(KeyCode.Space))
         //{
         //    Debug.Log("Fire");
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         //}
 
 
-    }
+    //}
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Items")
@@ -124,11 +124,9 @@ public class PlayerController : MonoBehaviour
         {
             GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-            countExplode -= Time.deltaTime;
             _nextTimeAttack += _timeAttack;
 
             animator.SetTrigger("isThrowed");
-            isThrow = false;
             Debug.Log("throwed");
             StartCoroutine("CheckisBomb");
             Debug.Log("Fire");
@@ -170,7 +168,11 @@ public class PlayerController : MonoBehaviour
     }
     public void Player_Jump()
     {
-        rb.AddForce(Vector3.up * 500.0f);
+        if (_nextTimeJump < Time.time)
+        {
+            rb.AddForce(Vector3.up * 700.0f);
+            _nextTimeJump += _timeJump;
+        }    
     }
 
     public void TakeDamage(int damge)

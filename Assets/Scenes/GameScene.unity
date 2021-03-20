@@ -933,10 +933,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.19
-  m_Height: 1.67
+  m_Radius: 0.40222836
+  m_Height: 1.9219179
   m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Center: {x: -0.0034167767, y: 0.97595906, z: 0.12636471}
 --- !u!114 &193197940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,7 +951,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rb: {fileID: 193197936}
-  isThrow: 0
   bomb: {fileID: 1528521149}
   _timeAttack: 3
   bombController: {fileID: 1040393911141939792, guid: 6e337d36186391e48b40b9fced92f884,
@@ -3827,7 +3826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4263173522900760, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.062000275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263173522900760, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_LocalPosition.z
