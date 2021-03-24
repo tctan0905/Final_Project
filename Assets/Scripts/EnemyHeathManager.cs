@@ -8,6 +8,6 @@ public class EnemyHeathManager : MonoBehaviour
     public EnemyController enemyController;
     public int damage;
     public int heath;
-    public Transform enemys;
+    public int count;
    
 }

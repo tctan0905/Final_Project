@@ -6,14 +6,19 @@ using UnityEngine.UI;
 public class WaveSpawn : MonoBehaviour
 {
     public enum EnemyStage { SPAWNING, WATTING, COUNTING}
+    [System.Serializable]
+    public class DemoWave
+    {
+        public Transform enemywave;
+        public int count;
+        
+    }
     [SerializeField]
-    //public List<GameObject> list_enemy1 = new List<GameObject>();
-    //public List<GameObject> list_enemy2 = new List<GameObject>();
-    //public List<GameObject> list_enemy3 = new List<GameObject>();
-    //public List<GameObject> list_enemy4 = new List<GameObject>();
+    public List<Transform> list_enemy = new List<Transform>();
     public Transform[] spawnPoint;
 
     public EnemyHeathManager[] EHM;
+    public DemoWave[] _wavedemo;
     private int nextWave = 0;
     public float timeBetweenWaves = 5f;
     public float timeCoutdown;
@@ -21,11 +26,19 @@ public class WaveSpawn : MonoBehaviour
     public EnemyStage stage = EnemyStage.COUNTING;
     public Text WaveText;
     public float searchCountDown = 1f;
+
+    public GameObject panelGame;
+    public GameObject panelStartGame;
+    private float timeStartGame = 6f;
+    public Text timeStartGameString;
+    
     void Start()
     {
         int currentWave = nextWave + 1;
         WaveText.text = "Wave: " + currentWave +"/4";
         timeCoutdown = timeBetweenWaves;
+        panelGame.SetActive(false);
+        panelStartGame.SetActive(true);
     }
     //public EnemyHeathManager GetEnemy()
     //{
@@ -47,22 +60,24 @@ public class WaveSpawn : MonoBehaviour
     //}
     void Update()
     {
-        if(stage == EnemyStage.WATTING)
+        CountDownStartGame();
+        if (stage == EnemyStage.WATTING)
         {
+            //Check enemy is alive  
             if(!EnemyisAlive())
             {
                 WaveComplete();
             }
             else
             {
-
+                return;
             }
         }
         if(timeCoutdown <= 0)
         {
             if(stage != EnemyStage.SPAWNING)
             {
-                StartCoroutine(SpawnWave(EHM[nextWave]));
+                StartCoroutine(SpawnWave(_wavedemo[nextWave]));
             }
         }
         else
@@ -83,9 +98,13 @@ public class WaveSpawn : MonoBehaviour
     void WaveComplete()
     {
         Debug.Log("Wave Complete");
-        if(nextWave +1 > 4)
+        timeCoutdown = timeBetweenWaves;
+        stage = EnemyStage.COUNTING;
+        if(nextWave + 1  > _wavedemo.Length-1)
         {
             Debug.Log("ALL WAVES COMPLETE");
+            stage = EnemyStage.WATTING;
+            panelGame.SetActive(true);
             
         }
         else
@@ -99,7 +118,7 @@ public class WaveSpawn : MonoBehaviour
         if(searchCountDown <=0)
         {
             searchCountDown = 1f;
-            if (GameObject.FindGameObjectWithTag("Player") == null)
+            if (GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 return false;
             }
@@ -108,13 +127,13 @@ public class WaveSpawn : MonoBehaviour
         return true;
     }
 
-    IEnumerator SpawnWave(EnemyHeathManager _waveEnemy)
+    IEnumerator SpawnWave(DemoWave _waves)
     {
         stage = EnemyStage.SPAWNING;
-        for(int i = 0;i< 2;i++)
+        for(int i = 0;i< _waves.count;i++)
         {
-            SpawnEnemy(_waveEnemy.enemys);
-            yield return new WaitForSeconds(1f);
+            SpawnEnemy(_waves.enemywave);
+            yield return new WaitForSeconds(2f);
         }
         stage = EnemyStage.WATTING;
         
@@ -123,6 +142,17 @@ public class WaveSpawn : MonoBehaviour
     void SpawnEnemy(Transform _enemy)
     {
         Transform _sp = spawnPoint[Random.Range(0, spawnPoint.Length)];
-        Instantiate(_enemy, _sp.position,_sp.rotation);
+        Transform _ene = Instantiate(_enemy, _sp.position,_sp.rotation);
+        list_enemy.Add(_ene);
+    }
+    public void CountDownStartGame()
+    {
+        timeStartGame  -= Time.deltaTime;
+        int compileint = (int)timeStartGame;
+        timeStartGameString.text = compileint.ToString();
+        if(timeStartGame <0)
+        {
+            panelStartGame.SetActive(false);
+        }
     }
 }

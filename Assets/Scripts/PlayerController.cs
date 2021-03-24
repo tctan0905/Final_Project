@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public Rigidbody rb;
     int bombCount = 0;
-    public Text bomb;
 
     [SerializeField]
     private float _timeAttack = 3f;
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
     {
         _nextTimeAttack = Time.time;
         _nextTimeJump = Time.time;
-        bomb.text = bombCount.ToString();
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
@@ -74,58 +72,23 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Die");
         }
     }
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Items")
-        {
-            bombCount++;
-            bomb.text = bombCount.ToString();
-        }
-    }
-
 
     public void Player_ThrownBomb()
     {
         if (_nextTimeAttack < Time.time)
         {
             GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
+            //BombPrefab newBomb = DataManager.Instance.GetBombPrefab();
+            //newBomb.bombPrefab.transform.position = fireThrown.position +2*transform.up;
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
+            //newBomb.bombPrefab.SetActive(true);
             _nextTimeAttack += _timeAttack;
-
             animator.SetTrigger("isThrowed");
             Debug.Log("throwed");
-            StartCoroutine("CheckisBomb");
+            //StartCoroutine("CheckisBomb");
             Debug.Log("Fire");
         }
-        
-
-        //    if (isBomb)
-        //    {
-        //        if (bombCount > 0)
-        //        {
-
-        //            bombCount--;
-        //            bomb.text = bombCount.ToString();
-        //            BombController newBomb = Instantiate(bombController, fireThrown.position, fireThrown.rotation) as BombController;
-        //            newBomb.speedBullet = speedBomb;
-        //            isBomb = false;
-        //        }
-        //        else
-        //        {
-        //            bombCount = 0;
-        //            bomb.text = bombCount.ToString();
-        //            isBomb = true;
-        //        }
-
-
-        //    }
-        //isBomb = true;
-        //try
-        // _bomb = DataManager.Instance.GetBombPrefab();
-        // _bomb.bombPrefab.transform.position = fireThrown.position + transform.position;
-        // _bomb.rigidbody.isKinematic = false;
-        // _bomb.rigidbody.AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-        // _bomb.bombPrefab.SetActive(true);
+       
     }
 
     public void Player_Attack()

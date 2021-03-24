@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    EnemyHeathManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {

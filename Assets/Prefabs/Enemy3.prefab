@@ -109,3 +109,6 @@ MonoBehaviour:
   enemyController: {fileID: 0}
   damage: 20
   heath: 100
+  enemys: {fileID: 0}
+  enemyss: {fileID: 0}
+  count: 4
