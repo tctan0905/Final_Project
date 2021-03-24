@@ -10,7 +10,6 @@ public class BombController : MonoBehaviour
     public float delay = 5f;
     public float explosionForece = 10f;
     public float radius = 20f;
-    public int DamagetoGive;
 
     void Start()
     {

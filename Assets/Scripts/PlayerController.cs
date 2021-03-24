@@ -67,47 +67,13 @@ public class PlayerController : MonoBehaviour
         //transform.localPosition += transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") ;
     }
 
-   // void Update()
-    //{
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    Debug.Log("Fire");
-        //    //try
-        //    //_bomb = DataManager.Instance.GetBombPrefab();
-        //    //_bomb.bombPrefab.transform.position = transform.position + 2 * transform.up; 
-        //    //_bomb.rigidbody.AddForce(fireThrown.forward * 20f, ForceMode.Impulse);
-        //    //_bomb.bombPrefab.SetActive(true);
-
-
-
-        //    //if (isBomb)
-        //    //{
-        //    //    if(bombCount > 0)
-        //    //    {
-        //    //        bombCount--;
-        //    //bomb.text = bombCount.ToString();
-        //    GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
-        //    newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-        //    isBomb = false;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        bombCount = 0;
-        //    //        bomb.text = bombCount.ToString();
-        //    //        isBomb = true;
-        //    //    }
-
-
-        //    //}
-
-        //}
-        //if (Input.GetKeyUp(KeyCode.Space))
-        //{
-        //    isBomb = true;
-        //}
-
-
-    //}
+    void Update()
+    {
+        if(heath <=0)
+        {
+            Debug.Log("Die");
+        }
+    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Items")
