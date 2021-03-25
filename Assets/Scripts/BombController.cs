@@ -30,9 +30,14 @@ public class BombController : MonoBehaviour
                 
             }
             PlayerController playerDamage = near.GetComponent<PlayerController>();
+            EnemyHeathManager enemyDamage = near.GetComponent <EnemyHeathManager>();
             if(playerDamage != null)
             {
                 playerDamage.heath -= 20;
+            }
+            else if(enemyDamage != null)
+            {
+                enemyDamage.heath -= 20;
             }
         }
          

@@ -9,23 +9,23 @@ public class WaveSpawn : MonoBehaviour
     [System.Serializable]
     public class DemoWave
     {
-        public Transform enemywave;
-        public int count;
-        
+        public string name;
+        public Transform[] enemywave;        
     }
     [SerializeField]
     public List<Transform> list_enemy = new List<Transform>();
     public Transform[] spawnPoint;
 
-    public EnemyHeathManager[] EHM;
     public DemoWave[] _wavedemo;
     private int nextWave = 0;
     public float timeBetweenWaves = 5f;
     public float timeCoutdown;
+    public int currentWave;
 
     public EnemyStage stage = EnemyStage.COUNTING;
     public Text WaveText;
     public float searchCountDown = 1f;
+    private int index = 0;
 
     public GameObject panelGame;
     public GameObject panelStartGame;
@@ -34,7 +34,7 @@ public class WaveSpawn : MonoBehaviour
     
     void Start()
     {
-        int currentWave = nextWave + 1;
+        currentWave = nextWave + 1;
         WaveText.text = "Wave: " + currentWave +"/4";
         timeCoutdown = timeBetweenWaves;
         panelGame.SetActive(false);
@@ -110,6 +110,9 @@ public class WaveSpawn : MonoBehaviour
         else
         {
             nextWave++;
+            currentWave++;
+            WaveText.text = "Wave: " + currentWave + "/4";
+            index = 0;
         }
     }
     bool EnemyisAlive()
@@ -130,7 +133,7 @@ public class WaveSpawn : MonoBehaviour
     IEnumerator SpawnWave(DemoWave _waves)
     {
         stage = EnemyStage.SPAWNING;
-        for(int i = 0;i< _waves.count;i++)
+        for(int i = 0;i< _waves.enemywave.Length;i++)
         {
             SpawnEnemy(_waves.enemywave);
             yield return new WaitForSeconds(2f);
@@ -139,11 +142,12 @@ public class WaveSpawn : MonoBehaviour
         
         yield break;
     }
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(Transform[] _enemy)
     {
         Transform _sp = spawnPoint[Random.Range(0, spawnPoint.Length)];
-        Transform _ene = Instantiate(_enemy, _sp.position,_sp.rotation);
-        list_enemy.Add(_ene);
+        Instantiate(_enemy[index], _sp.position, _sp.rotation);
+        index++;
+
     }
     public void CountDownStartGame()
     {
