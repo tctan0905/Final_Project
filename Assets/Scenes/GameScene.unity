@@ -2720,6 +2720,7 @@ GameObject:
   - component: {fileID: 374733744}
   - component: {fileID: 374733743}
   - component: {fileID: 374733745}
+  - component: {fileID: 374733746}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -2801,6 +2802,19 @@ MonoBehaviour:
   panelGame: {fileID: 1472595743}
   panelStartGame: {fileID: 1680178235}
   timeStartGameString: {fileID: 432413185}
+--- !u!114 &374733746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374733742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05466bec699d4ae4696aa076a08f1e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1122497155}
 --- !u!1001 &376061952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7843,8 +7857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122f1cfca42eef64eb8843cbce551418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1122497156}
-  enemy: {fileID: 795809715}
 --- !u!65 &795809719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15980,7 +15992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1789495615
 Transform:
   m_ObjectHideFlags: 0
@@ -16899,8 +16911,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122f1cfca42eef64eb8843cbce551418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1122497156}
-  enemy: {fileID: 1913856416}
 --- !u!1001 &1913895773
 PrefabInstance:
   m_ObjectHideFlags: 0
