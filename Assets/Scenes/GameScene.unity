@@ -2777,10 +2777,6 @@ MonoBehaviour:
   - name: Wave 1
     enemywave:
     - {fileID: 5554444808275827730, guid: c178bf971bd18ab40b5c1008b9b31136, type: 3}
-    - {fileID: 5554444808275827730, guid: c178bf971bd18ab40b5c1008b9b31136, type: 3}
-    - {fileID: 5554444808275827730, guid: c178bf971bd18ab40b5c1008b9b31136, type: 3}
-    - {fileID: 5554444808275827730, guid: c178bf971bd18ab40b5c1008b9b31136, type: 3}
-    - {fileID: 5554444808275827730, guid: c178bf971bd18ab40b5c1008b9b31136, type: 3}
   - name: Wave 2
     enemywave:
     - {fileID: 1181699490660287825, guid: a7aa996f40787b441903a262f7f799c1, type: 3}
