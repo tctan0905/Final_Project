@@ -6,8 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //public VariableJoystick variableJoystick;
     protected Joystick joystick;
-    public Vector3 joystickpos;
-    public Transform handle;
+
 
     // Start is called before the first frame update
     private float v;
@@ -48,6 +47,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
+        
     }
     void fixedUpate()
     {
@@ -75,13 +75,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
         float hAxis = joystick.Horizontal;
         float vAxis = joystick.Vertical;
         float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
-        var rb2 = GetComponent<Rigidbody>();
-        joystickpos = new Vector3(handle.position.x, 0, handle.position.y).normalized;
-        rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
-        rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
+        var input = new Vector3(hAxis, 0, vAxis);
+        if(input != Vector3.zero)
+        {
+            var rb2 = GetComponent<Rigidbody>();
+            rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
+            rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
+            animator.SetBool("isMoved", true);
+        }
+        else
+        {
+            animator.SetBool("isMoved", false);
+
+        }
 
         if (heath <=0)
         {
@@ -109,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     public void Player_Attack()
     {
-
+        Debug.Log("Attack");
     }
     public void Player_Jump()
     {
@@ -117,6 +127,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector3.up * 700.0f);
             _nextTimeJump += _timeJump;
+            Debug.Log("Jump");
         }    
     }
 

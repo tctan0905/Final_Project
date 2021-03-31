@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    EnemyHeathManager enemyManager;
-    PlayerController playerHealth;
+    private EnemyHeathManager enemyManager;
+    private PlayerController playerHealth;
     NavMeshAgent enemy;
     Transform target;
     Animator animator;
@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
         enemy = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         _nextTimeAttack = Time.time;
+        playerHealth = target.GetComponent<PlayerController>();
     }
     // Update is called once per frame
     void Update()
@@ -48,6 +49,8 @@ public class EnemyController : MonoBehaviour
         {
             _nextTimeAttack += _timeAttack;
             animator.SetTrigger("TriggerAttack");
+            //playerHealth.heath = playerHealth.heath - 10;
+            //Debug.Log("Player'heath: " + playerHealth.heath);
         }
 
     }

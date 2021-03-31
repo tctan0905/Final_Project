@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystickpos: {x: 0, y: 0, z: 0}
   handle: {fileID: 55896817}
-  speed: 10
+  speed: 4
   rb: {fileID: 193197936}
   _timeAttack: 3
   _nextTimeJump: 3
