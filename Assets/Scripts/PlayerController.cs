@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
+    //public VariableJoystick variableJoystick;
+    protected Joystick joystick;
+    public Vector3 joystickpos;
+    public Transform handle;
+
     // Start is called before the first frame update
     private float v;
     private float h;
@@ -17,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private float _timeAttack = 3f;
     private float _nextTimeAttack;
     private float _timeJump = 1.5f;
-    private float _nextTimeJump;
+    public float _nextTimeJump;
 
 
     public BombController bombController;
@@ -35,39 +40,50 @@ public class PlayerController : MonoBehaviour
     Animator animator;
 
 
-    private void Start()
+    void Start()
     {
+        joystick = FindObjectOfType<Joystick>();
         _nextTimeAttack = Time.time;
         _nextTimeJump = Time.time;
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
     }
-    private void fixedUpate()
+    void fixedUpate()
     {
-        //get movement input from user
-        v = Input.GetAxisRaw("Vertical");
-        h = Input.GetAxisRaw("Horizontal");
-        //make movement input become vector3
-        VerticalMovement = new Vector3(0, 0, v);
-        HorizontalMovement = new Vector3(h, 0, 0);
-        //change local direction into world direction
-        VerticalMovement = transform.TransformDirection(VerticalMovement);
-        HorizontalMovement = transform.TransformDirection(HorizontalMovement);
-        //add speed into movement
-        VerticalMovement *= speed;
-        HorizontalMovement *= speed;
-        //add movement into position
-        transform.localPosition += VerticalMovement * Time.fixedDeltaTime;
-        transform.localPosition += HorizontalMovement * Time.fixedDeltaTime;
+        ////get movement input from user
+        //v = Input.GetAxisRaw("Vertical");
+        //h = Input.GetAxisRaw("Horizontal");
+        ////make movement input become vector3
+        //VerticalMovement = new Vector3(0, 0, v);
+        //HorizontalMovement = new Vector3(h, 0, 0);
+        ////change local direction into world direction
+        //VerticalMovement = transform.TransformDirection(VerticalMovement);
+        //HorizontalMovement = transform.TransformDirection(HorizontalMovement);
+        ////add speed into movement
+        //VerticalMovement *= speed;
+        //HorizontalMovement *= speed;
+        ////add movement into position
+        //transform.localPosition += VerticalMovement * Time.fixedDeltaTime;
+        //transform.localPosition += HorizontalMovement * Time.fixedDeltaTime;
 
-        ////Move?
-        //transform.localPosition += transform.forward * Input.GetAxis("Vertical") + transform.right * Input.GetAxis("Horizontal") ;
+ 
+
+        //Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
+        //rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
     }
 
     void Update()
     {
-        if(heath <=0)
+        float hAxis = joystick.Horizontal;
+        float vAxis = joystick.Vertical;
+        float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
+        var rb2 = GetComponent<Rigidbody>();
+        joystickpos = new Vector3(handle.position.x, 0, handle.position.y).normalized;
+        rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
+        rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
+
+        if (heath <=0)
         {
             Debug.Log("Die");
         }
