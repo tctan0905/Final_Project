@@ -14,15 +14,13 @@ public class AudioManager : MonoBehaviour
     private float fl_Background, fl_soundEffects;
     public AudioSource backgroundAudio;
     public AudioSource[] effectAudio;
-    //private float musicVolume = 1f;
-    //private float effectVolume = 1f;
 
     private void Awake()
     {
         i_FirstPlay = PlayerPrefs.GetInt(FirstPlay);
         if(i_FirstPlay == 0)
         {
-            fl_Background = 0.25f;
+            fl_Background = 0.75f;
             fl_soundEffects = 0.75f;
             slider_Background.value = fl_Background;
             slider_SoundEffects.value = fl_soundEffects;
@@ -39,7 +37,6 @@ public class AudioManager : MonoBehaviour
             slider_SoundEffects.value = fl_soundEffects;
         }
 
-        //audioSource.Play();
     }
     public void SaveSoundSetting()
     {
@@ -57,28 +54,9 @@ public class AudioManager : MonoBehaviour
     public void UpdateSound()
     {
         backgroundAudio.volume = slider_Background.value;
-        for(int i =0; i < effectAudio.Length;i--)
-        {
+        for(int i =0; i < effectAudio.Length; i ++)
+        { 
             effectAudio[i].volume = slider_SoundEffects.value;
         }
     }
-    private void Update()
-    {
-       // audioSource.volume = musicVolume;
-       //effect.volume = effectVolume;
-    }
-
-
-    public void UpdateVolume(float volume)
-    {
-
-       // musicVolume = volume;
-      
-    }
-    public void UpdateEfxVolume(float volume)
-    {
-        //effectVolume = volume;
-
-    }
-
 }
