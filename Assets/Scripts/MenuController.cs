@@ -15,4 +15,19 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void OnButtonGameExitCLick()
+    {
+        SceneManager.LoadScene(sceneName: "MenuScene");
+    }
+
+    public void OnButtonReplayClick()
+    {
+        Debug.Log("REPLAY");
+    }
+
+    public void OnButtonResumeClick()
+    {
+        Debug.Log("RESUME");
+    }
 }
