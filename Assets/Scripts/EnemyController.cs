@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private float distance;
     private float _timeAttack = 3f;
     private float _nextTimeAttack;
+    public GameObject enemyob;
     void Awake()
     {
         target = PlayerManager.instance.player.transform;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         _nextTimeAttack = Time.time;
         playerHealth = target.GetComponent<PlayerController>();
+        enemyManager = GetComponent<EnemyHeathManager>();
     }
     // Update is called once per frame
     void Update()
@@ -35,12 +37,16 @@ public class EnemyController : MonoBehaviour
         }
         
         if(distance <= enemy.stoppingDistance)
-         {
+        {
              FaceTarget();
              //Attack
              Attack();
-         }
-
+        }
+        if(enemyManager.heath <0)
+        {
+            Destroy(enemyob);
+            
+        }
         
     }
     void Attack()
@@ -49,8 +55,8 @@ public class EnemyController : MonoBehaviour
         {
             _nextTimeAttack += _timeAttack;
             animator.SetTrigger("TriggerAttack");
-            //playerHealth.heath = playerHealth.heath - 10;
-            //Debug.Log("Player'heath: " + playerHealth.heath);
+            playerHealth.heath = playerHealth.heath - 10;
+            Debug.Log("Player'heath: " + playerHealth.heath);
         }
 
     }
@@ -60,5 +66,9 @@ public class EnemyController : MonoBehaviour
         Quaternion lookRotaion = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
         transform.rotation =  Quaternion.Slerp(transform.rotation,lookRotaion,Time.deltaTime*5f);
     }
-    
+    void OnCollisionEnter(Collision collision)
+    {
+            
+    }
+
 }

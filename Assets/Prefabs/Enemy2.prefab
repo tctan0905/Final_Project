@@ -31,6 +31,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5183004210986869395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818534312164555333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b127c91f2584ea74093242196e97fe99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 0}
+  damage: 10
+  heath: 50
+  count: 0
 --- !u!1001 &4087846678222260728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48,6 +64,11 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 882978609456249495, guid: 74ec31f465f32d84ca96630d9f889299,
+        type: 3}
+      propertyPath: enemyob
+      value: 
+      objectReference: {fileID: 1181699490660287829}
     - target: {fileID: 882978609456249495, guid: 74ec31f465f32d84ca96630d9f889299,
         type: 3}
       propertyPath: m_Enabled
@@ -130,6 +151,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ec31f465f32d84ca96630d9f889299, type: 3}
+--- !u!1 &3818534312164555333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884071517833900989, guid: 74ec31f465f32d84ca96630d9f889299,
+    type: 3}
+  m_PrefabInstance: {fileID: 4087846678222260728}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3812905874091476557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 887450288545058741, guid: 74ec31f465f32d84ca96630d9f889299,

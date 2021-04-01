@@ -35,9 +35,12 @@ public class PlayerController : MonoBehaviour
 
     private BombPrefab _bomb;
 
+    public bool isjump;
+    public bool isattack;
+    public bool isthrown;
     // Animator controller
     Animator animator;
-
+    Vector3 startPosition;
 
     void Start()
     {
@@ -47,7 +50,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
         heath = 100;
-        
+        isjump = true;
+        isattack = true;
+        isthrown = true;
+        startPosition = transform.position;
     }
     void fixedUpate()
     {
@@ -120,23 +126,53 @@ public class PlayerController : MonoBehaviour
     public void Player_Attack()
     {
         Debug.Log("Attack");
+        StartCoroutine(isAttack());
     }
     public void Player_Jump()
     {
-        if (_nextTimeJump < Time.time)
+        //if (_nextTimeJump < Time.time)
+        //{
+        //    rb.AddForce(Vector3.up * 700.0f);
+        //    _nextTimeJump += _timeJump;
+        //    Debug.Log("Jump");
+        //}
+        if(isjump)
         {
             rb.AddForce(Vector3.up * 700.0f);
             _nextTimeJump += _timeJump;
             Debug.Log("Jump");
-        }    
+            isjump = false;
+            StartCoroutine(isJump());
+        }
     }
 
     public void TakeDamage(int damge)
     {
         heath -= damge;
     }
-    //IEnumerable CheckisBomb()
-    //{
-    //    yield return new WaitForSeconds(3f);
-    //}
+    
+    IEnumerator isJump()
+    {
+        yield return new WaitForSeconds(1);
+        isjump = true;
+    }
+
+    IEnumerator isAttack()
+    {
+        yield return new WaitForSeconds(1);
+        isattack = true;
+    }
+
+    IEnumerator isThrown()
+    {
+        yield return new WaitForSeconds(3);
+        isthrown = true;
+    }
+
+    public void resetPlayer()
+    {
+        transform.position = startPosition;
+        heath = 100;
+
+    }
 }

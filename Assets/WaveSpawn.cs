@@ -27,17 +27,18 @@ public class WaveSpawn : MonoBehaviour
     public float searchCountDown = 1f;
     private int index = 0;
 
-    public GameObject panelGame;
+    public GameObject checkGameScreen;
     public GameObject panelStartGame;
     private float timeStartGame = 6f;
     public Text timeStartGameString;
-    
+
+    MenuController replaygame;
     void Start()
     {
         currentWave = nextWave + 1;
         WaveText.text = "Wave: " + currentWave +"/4";
-        timeCoutdown = timeBetweenWaves;
-        panelGame.SetActive(false);
+        timeCoutdown = 6f;
+        checkGameScreen.SetActive(false);
         panelStartGame.SetActive(true);
     }
     //public EnemyHeathManager GetEnemy()
@@ -104,7 +105,7 @@ public class WaveSpawn : MonoBehaviour
         {
             Debug.Log("ALL WAVES COMPLETE");
             stage = EnemyStage.WATTING;
-            panelGame.SetActive(true);
+            checkGameScreen.SetActive(true);
             
         }
         else
@@ -158,5 +159,21 @@ public class WaveSpawn : MonoBehaviour
         {
             panelStartGame.SetActive(false);
         }
+    }
+    public void Replay()
+    {
+        nextWave = 0;
+        stage = EnemyStage.COUNTING;
+        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        //replaygame.GetComponent<MenuController>().OnButtonReplayClick();
+        Debug.Log("Wave: " + nextWave.ToString());
+        currentWave = nextWave + 1;
+        WaveText.text = "Wave: " + currentWave + "/4";
+        timeCoutdown = 6f;
+        checkGameScreen.SetActive(false);
+        panelStartGame.SetActive(true);
+        timeStartGame = 6f;
+        CountDownStartGame();
+
     }
 }

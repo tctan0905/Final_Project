@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &7289935912776866946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456762010485981718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b127c91f2584ea74093242196e97fe99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 0}
+  damage: 10
+  heath: 20
+  count: 0
 --- !u!1 &5554444808275827726
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,8 +62,13 @@ PrefabInstance:
     - target: {fileID: 882978609456249492, guid: 74ec31f465f32d84ca96630d9f889299,
         type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.1
+      value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 882978609456249495, guid: 74ec31f465f32d84ca96630d9f889299,
+        type: 3}
+      propertyPath: enemyob
+      value: 
+      objectReference: {fileID: 5554444808275827726}
     - target: {fileID: 882978609456249495, guid: 74ec31f465f32d84ca96630d9f889299,
         type: 3}
       propertyPath: m_Enabled
@@ -130,6 +151,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74ec31f465f32d84ca96630d9f889299, type: 3}
+--- !u!1 &3456762010485981718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884071517833900989, guid: 74ec31f465f32d84ca96630d9f889299,
+    type: 3}
+  m_PrefabInstance: {fileID: 2574995653156581803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3453385370884472350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 887450288545058741, guid: 74ec31f465f32d84ca96630d9f889299,
