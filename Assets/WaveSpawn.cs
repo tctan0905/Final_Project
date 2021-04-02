@@ -29,7 +29,7 @@ public class WaveSpawn : MonoBehaviour
 
     public GameObject checkGameScreen;
     public GameObject panelStartGame;
-    private float timeStartGame = 6f;
+    private float timeStartGame = 4f;
     public Text timeStartGameString;
 
     MenuController replaygame;
@@ -155,7 +155,7 @@ public class WaveSpawn : MonoBehaviour
         timeStartGame  -= Time.deltaTime;
         int compileint = (int)timeStartGame;
         timeStartGameString.text = compileint.ToString();
-        if(timeStartGame <0)
+         if(timeStartGame <0)
         {
             panelStartGame.SetActive(false);
         }

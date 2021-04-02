@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BombController : MonoBehaviour
 {
-
+    public AudioSource efx_Explode;
     public GameObject explosionEffect;
     public float delay = 5f;
     public float explosionForece = 10f;
@@ -19,6 +19,7 @@ public class BombController : MonoBehaviour
     {
         Collider[] collider = Physics.OverlapSphere(transform.position, radius);
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        efx_Explode.Play();
 
         foreach (Collider near in collider)
         {

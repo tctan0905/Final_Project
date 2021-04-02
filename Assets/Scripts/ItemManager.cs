@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
+    PlayerController playerHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +22,18 @@ public class ItemManager : MonoBehaviour
         
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
-            Debug.Log("Collsion");
+            if(playerHealth.currentheath < 100)
+            {
+                playerHealth.currentheath += 30;
+                Destroy(gameObject);
+                Debug.Log("Collsion");
+            }
+            else
+            {
+                playerHealth.currentheath = 100;
+            }
+            
+
         }
     }
    
