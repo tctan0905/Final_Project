@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private float _timeAttack = 3f;
     private float _nextTimeAttack;
     public GameObject enemyob;
+    public HealthBar healthBarEnemy;
+
     void Awake()
     {
         target = PlayerManager.instance.player.transform;
@@ -28,7 +30,8 @@ public class EnemyController : MonoBehaviour
     {
         distance = Vector3.Distance(target.position, transform.position);
         enemy.SetDestination(target.position);
-        if(enemy.isStopped==false)
+
+        if (enemy.isStopped==false)
         {
             animator.SetBool("IsRun",true);
         }else
@@ -47,7 +50,8 @@ public class EnemyController : MonoBehaviour
             Destroy(enemyob);
             
         }
-        
+
+
     }
     void Attack()
     {
@@ -55,8 +59,7 @@ public class EnemyController : MonoBehaviour
         {
             _nextTimeAttack += _timeAttack;
             animator.SetTrigger("TriggerAttack");
-            playerHealth.heath = playerHealth.heath - 10;
-            Debug.Log("Player'heath: " + playerHealth.heath);
+            playerHealth.TakeDamage(enemyManager.damage);
         }
 
     }
@@ -66,9 +69,10 @@ public class EnemyController : MonoBehaviour
         Quaternion lookRotaion = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
         transform.rotation =  Quaternion.Slerp(transform.rotation,lookRotaion,Time.deltaTime*5f);
     }
-    void OnCollisionEnter(Collision collision)
+    public void TakeDamageEnemy(int damage)
     {
-            
+        enemyManager.heath -= damage;
+        healthBarEnemy.setHealthEnemy(enemyManager.heath);
     }
 
 }

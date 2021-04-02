@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     public Transform fireThrown;
     public float speedBomb;
 
-    public int heath;
+    public int health = 100;
+    public int currentheath;
 
 
     private BombPrefab _bomb;
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
     // Animator controller
     Animator animator;
     Vector3 startPosition;
+    public HealthBar healthBar;
+    public Text healthtext;
 
     void Start()
     {
@@ -49,7 +52,9 @@ public class PlayerController : MonoBehaviour
         _nextTimeJump = Time.time;
         rb = GetComponent<Rigidbody>();
         animator = soldier.GetComponent<Animator>();
-        heath = 100;
+        currentheath = health;
+        healthBar.setmaxHealth(health);
+        //healthtext.text = currentheath + "/100";
         isjump = true;
         isattack = true;
         isthrown = true;
@@ -81,27 +86,29 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-        float hAxis = joystick.Horizontal;
-        float vAxis = joystick.Vertical;
-        float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
-        var input = new Vector3(hAxis, 0, vAxis);
-        if(input != Vector3.zero)
+        if (currentheath >0)
         {
-            var rb2 = GetComponent<Rigidbody>();
-            rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
-            rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
-            animator.SetBool("isMoved", true);
+            float hAxis = joystick.Horizontal;
+            float vAxis = joystick.Vertical;
+            float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
+            var input = new Vector3(hAxis, 0, vAxis);
+            if (input != Vector3.zero)
+            {
+                var rb2 = GetComponent<Rigidbody>();
+                rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
+                rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
+                animator.SetBool("isMoved", true);
+            }
+            else
+            {
+                animator.SetBool("isMoved", false);
+
+            }
         }
         else
         {
-            animator.SetBool("isMoved", false);
-
-        }
-
-        if (heath <=0)
-        {
             Debug.Log("Die");
+
         }
     }
 
@@ -148,9 +155,12 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damge)
     {
-        heath -= damge;
+        currentheath -= damge;
+        healthBar.setHealth(currentheath);
+        Debug.Log("Player'heath: " + currentheath);
+
     }
-    
+
     IEnumerator isJump()
     {
         yield return new WaitForSeconds(1);
@@ -172,7 +182,8 @@ public class PlayerController : MonoBehaviour
     public void resetPlayer()
     {
         transform.position = startPosition;
-        heath = 100;
-
+        health = 100;
+        currentheath = health;
+        //healthtext.text = currentheath + "/100";
     }
 }
