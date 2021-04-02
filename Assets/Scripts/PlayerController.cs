@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -122,8 +122,7 @@ public class PlayerController : MonoBehaviour
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
             //newBomb.bombPrefab.SetActive(true);
             _nextTimeAttack += _timeAttack;
-            animator.SetTrigger("isThrowed");
-            Debug.Log("throwed");
+            animator.SetTrigger("TriggerThrow");
             //StartCoroutine("CheckisBomb");
             Debug.Log("Fire");
         }
@@ -132,8 +131,13 @@ public class PlayerController : MonoBehaviour
 
     public void Player_Attack()
     {
-        Debug.Log("Attack");
-        StartCoroutine(isAttack());
+        if (_nextTimeAttack < Time.time)
+        {
+            animator.SetTrigger("TriggerMeLee");
+            StartCoroutine(isAttack());
+            _nextTimeAttack += _timeAttack;
+            Debug.Log("Attack");
+        }
     }
     public void Player_Jump()
     {

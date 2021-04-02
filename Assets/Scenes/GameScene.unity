@@ -6685,7 +6685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 748944040}
-  txthealth: {fileID: 0}
+  txthealth: {fileID: 301604310}
 --- !u!1001 &749779388
 PrefabInstance:
   m_ObjectHideFlags: 0
