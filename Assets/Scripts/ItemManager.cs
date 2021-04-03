@@ -8,33 +8,35 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerHealth = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision other)
     {
         
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             if(playerHealth.currentheath < 100)
             {
                 playerHealth.currentheath += 30;
                 Destroy(gameObject);
                 Debug.Log("Collsion");
-            }
-            else
-            {
-                playerHealth.currentheath = 100;
-            }
-            
+            } 
 
         }
     }
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (playerHealth.currentheath < 100)
+            {
+                playerHealth.currentheath += 30;
+                Destroy(gameObject);
+                Debug.Log("Trigger");
+            }
+
+        }
+    }
 }

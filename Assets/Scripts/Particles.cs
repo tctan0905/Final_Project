@@ -5,6 +5,7 @@ using UnityEngine;
 public class Particles : MonoBehaviour
 {
     public ParticleSystem particles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class Particles : MonoBehaviour
 
     IEnumerator DestroyParticle()
     {
+
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }

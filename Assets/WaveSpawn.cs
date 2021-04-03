@@ -31,6 +31,7 @@ public class WaveSpawn : MonoBehaviour
     public GameObject panelStartGame;
     private float timeStartGame = 4f;
     public Text timeStartGameString;
+    public Text WonLoseTittle;
 
     MenuController replaygame;
     void Start()
@@ -106,7 +107,9 @@ public class WaveSpawn : MonoBehaviour
             Debug.Log("ALL WAVES COMPLETE");
             stage = EnemyStage.WATTING;
             checkGameScreen.SetActive(true);
-            
+            WonLoseTittle.text = "YOU WON";
+
+
         }
         else
         {
@@ -172,7 +175,7 @@ public class WaveSpawn : MonoBehaviour
         timeCoutdown = 6f;
         checkGameScreen.SetActive(false);
         panelStartGame.SetActive(true);
-        timeStartGame = 6f;
+        timeStartGame = 4f;
         CountDownStartGame();
 
     }

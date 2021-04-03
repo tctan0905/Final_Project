@@ -7,10 +7,12 @@ public class AudioSetting : MonoBehaviour
     private float fl_Background, fl_soundEffects;
     public AudioSource backgroundAudio;
     public AudioSource[] effectAudio;
+
     private void Awake()
     {
         ContinueSetting();
     }
+
     private void ContinueSetting()
     {
         fl_Background = PlayerPrefs.GetFloat(BackgroundPref);

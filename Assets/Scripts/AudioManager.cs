@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
         i_FirstPlay = PlayerPrefs.GetInt(FirstPlay);
         if(i_FirstPlay == 0)
         {
-            fl_Background = 0.75f;
+            fl_Background = .125f;
             fl_soundEffects = 0.75f;
             slider_Background.value = fl_Background;
             slider_SoundEffects.value = fl_soundEffects;
@@ -40,8 +40,8 @@ public class AudioManager : MonoBehaviour
     }
     public void SaveSoundSetting()
     {
-        PlayerPrefs.SetFloat(BackgroundPref, fl_Background);
-        PlayerPrefs.SetFloat(SoundEffectPref, fl_soundEffects);
+        PlayerPrefs.SetFloat(BackgroundPref, slider_Background.value);
+        PlayerPrefs.SetFloat(SoundEffectPref, slider_SoundEffects.value);
 
     }
     private void OnApplicationFocus(bool inFocus)

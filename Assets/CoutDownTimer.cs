@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class CoutDownTimer : MonoBehaviour
 {
-    public float totalTime;
+    public float totalTimer;
+    public float currentTimer;
     public Text text;
     private float minutes;
     private float second;
@@ -15,17 +16,23 @@ public class CoutDownTimer : MonoBehaviour
 
     [Header("Event Timer")]
     public bool useTimerEvent;
-    public UnityEvent TimerEvent; 
+    public UnityEvent TimerEvent;
+    public GameObject checkgameScreen;
+    public Text tittLose;
 
+    private void Awake()
+    {
+        currentTimer = totalTimer;
+    }
     // Update is called once per frame
     void Update()
     {
-        if(totalTime >0)
+        if(totalTimer >0)
         {
-            totalTime -= Time.deltaTime;
+            totalTimer -= Time.deltaTime;
 
-            minutes = (int)(totalTime / 60);
-            second = (int)(totalTime % 60);
+            minutes = (int)(totalTimer / 60);
+            second = (int)(totalTimer % 60);
             if(second < 10)
             {
                 test = "0" + second.ToString();
@@ -42,7 +49,7 @@ public class CoutDownTimer : MonoBehaviour
                     StartCoroutine(linkTimeout());
                     //stopcountdown = 1;
                     //TimerEvent.Invoke();
-                    totalTime = 0;
+                    totalTimer = 0;
                 }
             }
             text.text = minutes.ToString() + ":" + test;
@@ -54,10 +61,18 @@ public class CoutDownTimer : MonoBehaviour
     void Timeout()
     {
         Debug.Log("Time out");
+        checkgameScreen.SetActive(true);
+        tittLose.text = "YOU LOSE";
     }
     IEnumerator linkTimeout()
     {
         yield return new WaitForSeconds(1f);
         Timeout();
+    }
+    public void resetTimer()
+    {
+        totalTimer = currentTimer;
+        checkgameScreen.SetActive(false);
+
     }
 }
