@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public bool isjump;
     public bool isattack;
     public bool isthrown;
+    public bool isDead;
     // Animator controller
     Animator animator;
     Vector3 startPosition;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         isjump = true;
         isattack = true;
         isthrown = true;
+        isDead = true;
         startPosition = transform.position;
     }
     void fixedUpate()
@@ -107,7 +109,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Die");
+            if(isDead)
+            {
+                animator.SetTrigger("isDead1");
+                Debug.Log("Die");
+                currentheath = 0;
+                isDead = false;
+            }
+            
 
         }
     }
@@ -131,13 +140,22 @@ public class PlayerController : MonoBehaviour
 
     public void Player_Attack()
     {
-        if (_nextTimeAttack < Time.time)
+        if(isattack)
         {
             animator.SetTrigger("TriggerMeLee");
             StartCoroutine(isAttack());
-            _nextTimeAttack += _timeAttack;
+            //_nextTimeAttack += _timeAttack;
+            isattack = false;
             Debug.Log("Attack");
         }
+      
+        //if (_nextTimeAttack < Time.time)
+        //{
+        //    animator.SetTrigger("TriggerMeLee");
+        //    StartCoroutine(isAttack());
+        //    _nextTimeAttack += _timeAttack;
+        //    Debug.Log("Attack");
+        //}
     }
     public void Player_Jump()
     {
@@ -164,7 +182,28 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player'heath: " + currentheath);
 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Items")
+        {
+            if(currentheath <100)
+            {
+                currentheath += 20;
+                if(currentheath >100)
+                {
+                    currentheath = health;
+                    healthBar.setHealth(currentheath);
+                }
+            }
+            else
+            {
+                currentheath = health;
+                healthBar.setHealth(currentheath);
 
+            }
+        }
+
+    }
     IEnumerator isJump()
     {
         yield return new WaitForSeconds(1);

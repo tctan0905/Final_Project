@@ -9,7 +9,9 @@ public class MenuController : MonoBehaviour
     PauseResume pause_resume_game;
     WaveSpawn bt_replaygame;
     public GameObject pauseScreen;
+    public GameObject settingScreen;
     bool isPause;
+    
 
     void Start()
     {
@@ -62,6 +64,11 @@ public class MenuController : MonoBehaviour
         pauseScreen.SetActive(false);
         Debug.Log("RESUME");
     }
-
+    public void OnButtonSettingClick()
+    {
+        settingScreen.SetActive(true);
+        pauseScreen.SetActive(false);
+        
+    }
 
 }

@@ -17,12 +17,11 @@ public class ItemManager : MonoBehaviour
         
         if (other.gameObject.tag == "Player")
         {
-            if(playerHealth.currentheath < 100)
-            {
-                playerHealth.currentheath += 30;
+            
+                //playerHealth.currentheath += 30;
                 Destroy(gameObject);
                 Debug.Log("Collsion");
-            } 
+            
 
         }
     }
