@@ -9,21 +9,23 @@ public class EnemyController : MonoBehaviour
     private PlayerController playerHealth;
     NavMeshAgent enemy;
     Transform target;
-    Animator animator;
+    Animator animatorEnemy;
     private float distance;
     private float _timeAttack = 3f;
     private float _nextTimeAttack;
     public GameObject enemyob;
     public HealthBar healthBarEnemy;
+    bool isDead;
 
     void Awake()
     {
         target = PlayerManager.instance.player.transform;
         enemy = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animatorEnemy = GetComponent<Animator>();
         _nextTimeAttack = Time.time;
         playerHealth = target.GetComponent<PlayerController>();
         enemyManager = GetComponent<EnemyHeathManager>();
+        isDead = false;
     }
     // Update is called once per frame
     void Update()
@@ -33,10 +35,10 @@ public class EnemyController : MonoBehaviour
 
         if (enemy.isStopped==false)
         {
-            animator.SetBool("IsRun",true);
+            animatorEnemy.SetBool("IsRun",true);
         }else
         {
-            animator.SetBool("IsRun",false);
+            animatorEnemy.SetBool("IsRun",false);
         }
         
         if(distance <= enemy.stoppingDistance)
@@ -47,8 +49,14 @@ public class EnemyController : MonoBehaviour
         }
         if(enemyManager.heath <0)
         {
-            Destroy(enemyob);
-            
+            if(!isDead)
+            {
+                isDead = true;
+                animatorEnemy.SetTrigger("TriggerDead");
+                StartCoroutine(RemoveEnemy());
+                
+            }
+
         }
 
 
@@ -58,7 +66,7 @@ public class EnemyController : MonoBehaviour
         if(_nextTimeAttack<Time.time)
         {
             _nextTimeAttack += _timeAttack;
-            animator.SetTrigger("TriggerAttack");
+            animatorEnemy.SetTrigger("TriggerAttack");
             playerHealth.TakeDamage(enemyManager.damage);
         }
 
@@ -69,10 +77,23 @@ public class EnemyController : MonoBehaviour
         Quaternion lookRotaion = Quaternion.LookRotation(new Vector3(direction.x,0,direction.z));
         transform.rotation =  Quaternion.Slerp(transform.rotation,lookRotaion,Time.deltaTime*5f);
     }
+
     public void TakeDamageEnemy(int damage)
     {
         enemyManager.heath -= damage;
         healthBarEnemy.setHealthEnemy(enemyManager.heath);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "FootR")
+        {
+            TakeDamageEnemy(5);
+        }
+    }
+    IEnumerator RemoveEnemy()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(enemyob);
+    }
 }

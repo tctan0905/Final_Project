@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     //public VariableJoystick variableJoystick;
     protected Joystick joystick;
-    
+
+    public AudioSource efx_Attack;
+    public AudioSource efx_Jump;
 
     // Start is called before the first frame update
     private float v;
@@ -45,7 +47,6 @@ public class PlayerController : MonoBehaviour
     Vector3 startPosition;
     public HealthBar healthBar;
     public Text healthtext;
-
     void Start()
     {
         joystick = FindObjectOfType<Joystick>();
@@ -142,11 +143,13 @@ public class PlayerController : MonoBehaviour
     {
         if(isattack)
         {
-            animator.SetTrigger("TriggerMeLee");
+            animator.SetTrigger("TriggerMelee");
+            efx_Attack.Play();
             StartCoroutine(isAttack());
             //_nextTimeAttack += _timeAttack;
             isattack = false;
             Debug.Log("Attack");
+            
         }
       
         //if (_nextTimeAttack < Time.time)
@@ -168,7 +171,8 @@ public class PlayerController : MonoBehaviour
         if(isjump)
         {
             rb.AddForce(Vector3.up * 700.0f);
-            _nextTimeJump += _timeJump;
+            efx_Jump.Play();
+            //_nextTimeJump += _timeJump;
             Debug.Log("Jump");
             isjump = false;
             StartCoroutine(isJump());

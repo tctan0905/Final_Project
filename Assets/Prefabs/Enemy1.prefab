@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
   damage: 10
-  heath: 20
+  heath: 40
   count: 0
 --- !u!1 &5554444808275827726
 GameObject:

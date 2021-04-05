@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  damage: 10
-  heath: 50
+  damage: 20
+  heath: 60
   count: 0
 --- !u!1001 &3968860452488247562
 PrefabInstance:
