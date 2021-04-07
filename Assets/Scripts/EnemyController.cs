@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public GameObject enemyob;
     public HealthBar healthBarEnemy;
     bool isDead;
+    Rigidbody rbenemy;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class EnemyController : MonoBehaviour
         playerHealth = target.GetComponent<PlayerController>();
         enemyManager = GetComponent<EnemyHeathManager>();
         isDead = false;
+        rbenemy = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
@@ -47,7 +49,7 @@ public class EnemyController : MonoBehaviour
              //Attack
              Attack();
         }
-        if(enemyManager.heath <0)
+        if(enemyManager.heath <=0)
         {
             if(!isDead)
             {
@@ -88,7 +90,18 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "FootR")
         {
+            enemyManager.heath -= 5;
+            rbenemy.velocity = -Vector3.forward * 5f;
+            Debug.Log("Collision Foot");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "FootR")
+        {
             TakeDamageEnemy(5);
+            Debug.Log("Trigger Foot");
+
         }
     }
     IEnumerator RemoveEnemy()

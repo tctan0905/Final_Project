@@ -25,7 +25,6 @@ public class SpawnItems : MonoBehaviour
             if(!isItems())
             {
                 SpawnItemsRandom();
-                timespawn = timesbetween;
             }
             
         }
@@ -34,6 +33,8 @@ public class SpawnItems : MonoBehaviour
     {
         random = Random.Range(0, Items.Length);
         Instantiate(Items[random], spawnPos.position, spawnPos.rotation);
+        timespawn = timesbetween;
+
     }
     bool isItems()
     {

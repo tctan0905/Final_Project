@@ -46,7 +46,9 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     Vector3 startPosition;
     public HealthBar healthBar;
-    public Text healthtext;
+    public GameObject checkgameScreen;
+    public Text txtcheckGame;
+    public GameObject footR;
     void Start()
     {
         joystick = FindObjectOfType<Joystick>();
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
         isthrown = true;
         isDead = true;
         startPosition = transform.position;
+        checkgameScreen.SetActive(false);
+        footR.SetActive(false);
     }
     void fixedUpate()
     {
@@ -116,6 +120,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Die");
                 currentheath = 0;
                 isDead = false;
+                checkgameScreen.SetActive(true);
+                txtcheckGame.text = "YOU LOSE";
             }
             
 
@@ -145,6 +151,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("TriggerMelee");
             efx_Attack.Play();
+            footR.SetActive(true);
             StartCoroutine(isAttack());
             //_nextTimeAttack += _timeAttack;
             isattack = false;
@@ -218,6 +225,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         isattack = true;
+        footR.SetActive(false);
     }
 
     IEnumerator isThrown()
@@ -231,6 +239,7 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         health = 100;
         currentheath = health;
+        animator.SetBool("isMoved", false);
         //healthtext.text = currentheath + "/100";
     }
 }
