@@ -175,13 +175,16 @@ public class PlayerController : MonoBehaviour
         //    _nextTimeJump += _timeJump;
         //    Debug.Log("Jump");
         //}
+        animator.SetTrigger("TriggerJump");
         if(isjump)
         {
+            
             rb.AddForce(Vector3.up * 700.0f);
             efx_Jump.Play();
             //_nextTimeJump += _timeJump;
             Debug.Log("Jump");
             isjump = false;
+            
             StartCoroutine(isJump());
         }
     }
