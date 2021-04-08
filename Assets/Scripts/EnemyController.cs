@@ -91,7 +91,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag == "FootR")
         {
             enemyManager.heath -= 5;
-            rbenemy.velocity = -Vector3.forward * 5f;
+            rbenemy.velocity = -Vector3.forward * 100.0f;
             Debug.Log("Collision Foot");
         }
     }
@@ -101,6 +101,7 @@ public class EnemyController : MonoBehaviour
         {
             TakeDamageEnemy(5);
             Debug.Log("Trigger Foot");
+            rbenemy.velocity = -Vector3.forward * 100.0f;
 
         }
     }

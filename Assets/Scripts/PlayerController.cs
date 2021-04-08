@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public GameObject checkgameScreen;
     public Text txtcheckGame;
     public GameObject footR;
+    Quaternion startRotation;
     void Start()
     {
         joystick = FindObjectOfType<Joystick>();
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         startPosition = transform.position;
         checkgameScreen.SetActive(false);
         footR.SetActive(false);
+        startRotation = transform.rotation;
     }
     void fixedUpate()
     {
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviour
             float vAxis = joystick.Vertical;
             float zAxis = Mathf.Atan2(hAxis, vAxis) * Mathf.Rad2Deg;
             var input = new Vector3(hAxis, 0, vAxis);
+            healthBar.setHealth(currentheath);
             if (input != Vector3.zero)
             {              
 
@@ -130,17 +133,14 @@ public class PlayerController : MonoBehaviour
 
     public void Player_ThrownBomb()
     {
-        if (_nextTimeAttack < Time.time)
+        if (isthrown)
         {
             GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
-            //BombPrefab newBomb = DataManager.Instance.GetBombPrefab();
-            //newBomb.bombPrefab.transform.position = fireThrown.position +2*transform.up;
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-            //newBomb.bombPrefab.SetActive(true);
-            _nextTimeAttack += _timeAttack;
             animator.SetTrigger("TriggerThrow");
-            //StartCoroutine("CheckisBomb");
             Debug.Log("Fire");
+            isthrown = false;
+            StartCoroutine(isThrown());
         }
        
     }
@@ -169,12 +169,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Player_Jump()
     {
-        //if (_nextTimeJump < Time.time)
-        //{
-        //    rb.AddForce(Vector3.up * 700.0f);
-        //    _nextTimeJump += _timeJump;
-        //    Debug.Log("Jump");
-        //}
+       
         animator.SetTrigger("TriggerJump");
         if(isjump)
         {
@@ -200,23 +195,15 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Items")
         {
-            if(currentheath <100)
-            {
-                currentheath += 20;
-                if(currentheath >100)
-                {
-                    currentheath = health;
-                    healthBar.setHealth(currentheath);
-                }
-            }
-            else
+            currentheath += 20;
+            healthBar.setHealth(currentheath);
+            if(currentheath > health)
             {
                 currentheath = health;
-                healthBar.setHealth(currentheath);
-
+                healthBar.setmaxHealth(health);
             }
         }
-
+        Debug.Log("HP : " + currentheath);
     }
     IEnumerator isJump()
     {
@@ -239,10 +226,18 @@ public class PlayerController : MonoBehaviour
 
     public void resetPlayer()
     {
-        transform.position = startPosition;
-        health = 100;
+        joystick = FindObjectOfType<Joystick>();
+        animator.SetTrigger("isAlive");
         currentheath = health;
-        animator.SetBool("isMoved", false);
-        //healthtext.text = currentheath + "/100";
+        healthBar.setmaxHealth(health);
+        Debug.Log("HP : " + currentheath);
+        isjump = true;
+        isattack = true;
+        isthrown = true;
+        isDead = true;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
+        checkgameScreen.SetActive(false);
+        footR.SetActive(false);
     }
 }

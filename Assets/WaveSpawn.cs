@@ -20,7 +20,7 @@ public class WaveSpawn : MonoBehaviour
     private int nextWave = 0;
     public float timeBetweenWaves = 5f;
     public float timeCoutdown;
-    public int currentWave;
+    private int currentWave;
 
     public EnemyStage stage = EnemyStage.COUNTING;
     public Text WaveText;
@@ -32,8 +32,8 @@ public class WaveSpawn : MonoBehaviour
     private float timeStartGame = 4f;
     public Text timeStartGameString;
     public Text WonLoseTittle;
-
     MenuController replaygame;
+    
     void Start()
     {
         currentWave = nextWave + 1;
@@ -42,24 +42,7 @@ public class WaveSpawn : MonoBehaviour
         checkGameScreen.SetActive(false);
         panelStartGame.SetActive(true);
     }
-    //public EnemyHeathManager GetEnemy()
-    //{
-    //    //foreach(var enemys in list_enemy1)
-    //    //{
-    //    //    if(enemys.activeSelf)
-    //    //    {
-    //    //        return enemys;
-    //    //    }
 
-    //    //}
-
-    //    //EnemyHeathManager enemy = new EnemyHeathManager()
-    //    //{
-    //    //    enemyPrefabs = Instance(_enemyPrefabs),
-    //    //};
-    //    //enemy
-    //    return false;
-    //}
     void Update()
     {
         CountDownStartGame();
@@ -86,16 +69,7 @@ public class WaveSpawn : MonoBehaviour
         {
             timeCoutdown -= Time.deltaTime;
         }
-        //if(timeBetweenCoutdown <=0)
-        //{
-
-        //}
-        //for(int i = 0;i< list_enemy1.Count;i++)
-        //{
-        //    GameObject ene = Instantiate(list_enemy1[i], cubecreate.position, Quaternion.identity);
-
-        //}
-
+ 
     }
     void WaveComplete()
     {
@@ -150,6 +124,7 @@ public class WaveSpawn : MonoBehaviour
     {
         Transform _sp = spawnPoint[Random.Range(0, spawnPoint.Length)];
         Instantiate(_enemy[index], _sp.position, _sp.rotation);
+        list_enemy.Add(_enemy[index]);
         index++;
 
     }
@@ -166,13 +141,20 @@ public class WaveSpawn : MonoBehaviour
     public void Replay()
     {
         nextWave = 0;
+        timeCoutdown = 6f;
+        searchCountDown = 1f;
+        index = 0;
         stage = EnemyStage.COUNTING;
-        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        list_enemy.Clear();
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            GameObject.Destroy(enemy);
+        }
         //replaygame.GetComponent<MenuController>().OnButtonReplayClick();
         Debug.Log("Wave: " + nextWave.ToString());
         currentWave = nextWave + 1;
         WaveText.text = "Wave: " + currentWave + "/4";
-        timeCoutdown = 6f;
         checkGameScreen.SetActive(false);
         panelStartGame.SetActive(true);
         timeStartGame = 4f;

@@ -8,7 +8,7 @@ public class BombController : MonoBehaviour
     public GameObject explosionEffect;
     public float delay = 5f;
     public float explosionForece = 10f;
-    public float radius = 20f;
+    public float radius = 25f;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class BombController : MonoBehaviour
             EnemyController enemyDamage = near.GetComponent <EnemyController>();
             if(playerDamage != null)
             {
-                playerDamage.health -= 20;
+                playerDamage.health -= 10;
             }
             else if(enemyDamage != null)
             {
@@ -51,8 +51,8 @@ public class BombController : MonoBehaviour
     IEnumerator Explose()
     {
         yield return new WaitForSeconds(3f);
-        transform.gameObject.SetActive(false);
-        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        Destroy(gameObject);
+        //gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
     
 }

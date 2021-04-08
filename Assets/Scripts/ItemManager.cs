@@ -5,10 +5,12 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     PlayerController playerHealth;
+    HealthBar healthbar;
     // Start is called before the first frame update
     void Start()
     {
         playerHealth = GetComponent<PlayerController>();
+        healthbar = GetComponent<HealthBar>();
     }
 
 
@@ -17,25 +19,11 @@ public class ItemManager : MonoBehaviour
         
         if (other.gameObject.tag == "Player")
         {
-            
                 //playerHealth.currentheath += 30;
                 Destroy(gameObject);
                 Debug.Log("Collsion");
             
-
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            if (playerHealth.currentheath < 100)
-            {
-                playerHealth.currentheath += 30;
-                Destroy(gameObject);
-                Debug.Log("Trigger");
-            }
 
-        }
-    }
 }

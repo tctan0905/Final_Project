@@ -92,7 +92,7 @@ MonoBehaviour:
     type: 3}
   delay: 3
   explosionForece: 10
-  radius: 5
+  radius: 10
 --- !u!1001 &8199420974776932505
 PrefabInstance:
   m_ObjectHideFlags: 0
