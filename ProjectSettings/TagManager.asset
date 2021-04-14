@@ -8,6 +8,7 @@ TagManager:
   - Items
   - Enemy
   - FootR
+  - Attack
   layers:
   - Default
   - TransparentFX

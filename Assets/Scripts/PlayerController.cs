@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Transform fireThrown;
     public float speedBomb;
 
-    public int health = 100;
+    public int health = 200;
     public int currentheath;
 
 
@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     // Animator controller
     Animator animator;
+    Animator animator2;
     Vector3 startPosition;
     public HealthBar healthBar;
     public GameObject checkgameScreen;
@@ -135,9 +136,9 @@ public class PlayerController : MonoBehaviour
     {
         if (isthrown)
         {
+            animator.SetTrigger("TriggerThrow");
             GameObject newBomb = Instantiate(bombControllertest, fireThrown.position, fireThrown.rotation);
             newBomb.GetComponent<Rigidbody>().AddForce((fireThrown.forward + fireThrown.up) * speedBomb, ForceMode.Impulse);
-            animator.SetTrigger("TriggerThrow");
             Debug.Log("Fire");
             isthrown = false;
             StartCoroutine(isThrown());
@@ -156,7 +157,6 @@ public class PlayerController : MonoBehaviour
             //_nextTimeAttack += _timeAttack;
             isattack = false;
             Debug.Log("Attack");
-            
         }
       
         //if (_nextTimeAttack < Time.time)
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Items")
         {
-            currentheath += 20;
+            currentheath += 30;
             healthBar.setHealth(currentheath);
             if(currentheath > health)
             {
@@ -216,6 +216,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1);
         isattack = true;
         footR.SetActive(false);
+
     }
 
     IEnumerator isThrown()

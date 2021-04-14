@@ -10,11 +10,15 @@ public class MenuController : MonoBehaviour
     WaveSpawn bt_replaygame;
     public GameObject pauseScreen;
     public GameObject settingScreen;
+    public GameObject[] selectionScreen;
+    public GameObject playScreen;
+    public GameObject selectionScreen2;
     bool isPause;
     
 
     void Start()
     {
+        selectionScreen = new GameObject[3];
         isPause = false;
     }
 
@@ -32,7 +36,14 @@ public class MenuController : MonoBehaviour
     }
     public void OnButtonPlayClick()
     {
-        SceneManager.LoadScene(sceneName: "GameScene");
+        //SceneManager.LoadScene(sceneName: "GameScene");
+
+        playScreen.SetActive(false);
+        //for(int i =0; i< selectionScreen.Length;i++)
+        //{
+        //    selectionScreen[i].SetActive(true);
+        //}
+        selectionScreen2.SetActive(true);
     }
 
     public void OnButtonExitClick()
@@ -70,5 +81,6 @@ public class MenuController : MonoBehaviour
         pauseScreen.SetActive(false);
         
     }
+    
 
 }

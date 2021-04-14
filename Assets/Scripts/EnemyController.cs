@@ -17,10 +17,13 @@ public class EnemyController : MonoBehaviour
     public HealthBar healthBarEnemy;
     bool isDead;
     Rigidbody rbenemy;
-
+    public GameObject isAttack;
+    
     void Awake()
     {
+        print(PlayerManager.instance.player.name);
         target = PlayerManager.instance.player.transform;
+        Debug.Log(target);
         enemy = GetComponent<NavMeshAgent>();
         animatorEnemy = GetComponent<Animator>();
         _nextTimeAttack = Time.time;
@@ -28,6 +31,7 @@ public class EnemyController : MonoBehaviour
         enemyManager = GetComponent<EnemyHeathManager>();
         isDead = false;
         rbenemy = GetComponent<Rigidbody>();
+        isAttack.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -67,9 +71,12 @@ public class EnemyController : MonoBehaviour
     {
         if(_nextTimeAttack<Time.time)
         {
-            _nextTimeAttack += _timeAttack;
+            
             animatorEnemy.SetTrigger("TriggerAttack");
-            playerHealth.TakeDamage(enemyManager.damage);
+            isAttack.SetActive(true);
+            StartCoroutine(DisableAttack());
+            _nextTimeAttack += _timeAttack;
+            //playerHealth.TakeDamage(enemyManager.damage);
         }
 
     }
@@ -109,5 +116,10 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         Destroy(enemyob);
+    }
+    IEnumerator DisableAttack()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isAttack.SetActive(false);
     }
 }

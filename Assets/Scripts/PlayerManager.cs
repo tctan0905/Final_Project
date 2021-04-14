@@ -6,11 +6,13 @@ public class PlayerManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static PlayerManager instance;
-    void  Awake()
-    
-    {
-        instance = this;
-    }
     public GameObject player;
- 
+
+    private void Awake()
+    {
+        //De anh xem con cai gi nua
+        instance = this;
+        print(gameObject.name);
+    }
+
 }
