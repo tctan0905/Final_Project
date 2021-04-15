@@ -35,6 +35,9 @@ public class JoystickController : MonoBehaviour, IDragHandler, IPointerUpHandler
         move = Vector3.zero;
         StopCoroutine("PlayerMove");
         animator.SetBool("isMoved",false);
+        animator.ResetTrigger("TriggerThrow");
+        animator.ResetTrigger("TriggerAttack");
+        animator.ResetTrigger("TriggerJump");
     }
     public void OnPointerDown(PointerEventData eventData)
     {
