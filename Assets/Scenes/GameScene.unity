@@ -1394,6 +1394,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41431f6f929f2471d88dc1f0a6afcd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &193197942
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193197935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.4
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!4 &199313924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4179240027576528, guid: 86ca6560575669f47bb9427d4e937af0,
@@ -8833,6 +8851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyob: {fileID: 0}
   healthBarEnemy: {fileID: 0}
+  isAttack: {fileID: 0}
 --- !u!65 &795809719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20311,6 +20330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyob: {fileID: 0}
   healthBarEnemy: {fileID: 0}
+  isAttack: {fileID: 0}
 --- !u!1001 &1913895773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22428,10 +22448,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 193197936, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
+      propertyPath: m_Mass
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 193197939, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 193197940, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
-      propertyPath: efx_Attack
-      value: 
-      objectReference: {fileID: 124690772}
+      propertyPath: speed
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 193197940, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
       propertyPath: efx_Jump
       value: 
@@ -22441,13 +22469,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 748944041}
     - target: {fileID: 193197940, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
-      propertyPath: checkgameScreen
+      propertyPath: efx_Attack
       value: 
-      objectReference: {fileID: 1472595743}
+      objectReference: {fileID: 124690772}
     - target: {fileID: 193197940, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
       propertyPath: txtcheckGame
       value: 
       objectReference: {fileID: 302816158}
+    - target: {fileID: 193197940, guid: e0137ba28d4800f4fa4a8c50bb17393f, type: 3}
+      propertyPath: checkgameScreen
+      value: 
+      objectReference: {fileID: 1472595743}
     - target: {fileID: 2631758686413690394, guid: e0137ba28d4800f4fa4a8c50bb17393f,
         type: 3}
       propertyPath: m_IsActive
@@ -22457,6 +22489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SoldierModel Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
         type: 3}
@@ -22475,6 +22512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -22487,16 +22529,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2633507417500174248, guid: e0137ba28d4800f4fa4a8c50bb17393f,
         type: 3}

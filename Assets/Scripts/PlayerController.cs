@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
         if(isjump)
         {
             
-            rb.AddForce(Vector3.up * 700.0f);
+            rb.AddForce(Vector3.up * 900.0f);
             efx_Jump.Play();
             //_nextTimeJump += _timeJump;
             Debug.Log("Jump");
