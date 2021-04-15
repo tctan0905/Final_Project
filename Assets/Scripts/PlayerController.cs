@@ -109,7 +109,11 @@ public class PlayerController : MonoBehaviour
                 var rb2 = GetComponent<Rigidbody>();
                 rb2.velocity = new Vector3(joystick.Horizontal * speed, rb2.velocity.y, joystick.Vertical * speed);
                 rb2.transform.eulerAngles = new Vector3(rb2.transform.eulerAngles.x, zAxis, rb2.transform.eulerAngles.z);
+                animator.ResetTrigger("TriggerJump");
+                animator.ResetTrigger("TriggerThrow");
+                animator.ResetTrigger("TriggerAttack");
                 animator.SetBool("isMoved", true);
+                
             }
             else
             {
@@ -169,7 +173,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Player_Jump()
     {
-       
+        animator.ResetTrigger("TriggerThrow");
         animator.SetTrigger("TriggerJump");
         if(isjump)
         {
