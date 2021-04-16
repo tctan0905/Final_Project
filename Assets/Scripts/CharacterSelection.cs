@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CharacterSelection : MonoBehaviour
 {
-    public GameObject[] characterList;
-    private int index;
+    private GameObject[] characterList;
+    public int index;
     // Start is called before the first frame update
     void Start()
     {
-        index = PlayerPrefs.GetInt("SelectedCharacter",1);
+        index = PlayerPrefs.GetInt("SelectedCharacter", 1);
         characterList = new GameObject[transform.childCount];
         
         for(int i =0;i < transform.childCount;i++)

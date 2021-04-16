@@ -32,7 +32,7 @@ public class BombController : MonoBehaviour
             EnemyController enemyDamage = near.GetComponent <EnemyController>();
             if(playerDamage != null)
             {
-                playerDamage.health -= 10;
+                playerDamage.TakeDamage(10);
             }
             else if(enemyDamage != null)
             {

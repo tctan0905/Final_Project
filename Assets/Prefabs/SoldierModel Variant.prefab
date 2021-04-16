@@ -107,7 +107,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   checkgameScreen: {fileID: 0}
   txtcheckGame: {fileID: 0}
-  footR: {fileID: 3732427274533999650}
+  footR:
+  - {fileID: 0}
 --- !u!1001 &2631012983786340528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075317853926262, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1085183140485796, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -258,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 1945584542398886, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968872329955700, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1978292200757020, guid: 0418708de6c1f5d4799def6776f61029, type: 3}
       propertyPath: m_IsActive
@@ -435,12 +440,6 @@ GameObject:
 --- !u!4 &2634016837061658920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4173771564108184, guid: 0418708de6c1f5d4799def6776f61029,
-    type: 3}
-  m_PrefabInstance: {fileID: 2631012983786340528}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3732427274533999650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1679563981025612946, guid: 0418708de6c1f5d4799def6776f61029,
     type: 3}
   m_PrefabInstance: {fileID: 2631012983786340528}
   m_PrefabAsset: {fileID: 0}

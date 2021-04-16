@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db0e191fb33e484490665419382f410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemytarget: {fileID: 3456762010485981718}
 --- !u!114 &7289935912776866946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b127c91f2584ea74093242196e97fe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyController: {fileID: 0}
   damage: 5
   heath: 40
   count: 0
@@ -219,6 +219,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StoppingDistance
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 882978609456249493, guid: 74ec31f465f32d84ca96630d9f889299,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 882978609456249495, guid: 74ec31f465f32d84ca96630d9f889299,
         type: 3}

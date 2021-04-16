@@ -47,12 +47,7 @@ public class EnemyController : MonoBehaviour
             animatorEnemy.SetBool("IsRun",false);
         }
         
-        if(distance <= enemy.stoppingDistance)
-        {
-             FaceTarget();
-             //Attack
-             Attack();
-        }
+        
         if(enemyManager.heath <=0)
         {
             if(!isDead)
@@ -63,6 +58,15 @@ public class EnemyController : MonoBehaviour
                 
             }
 
+        }
+        else
+        {
+            if (distance <= enemy.stoppingDistance)
+            {
+                FaceTarget();
+                //Attack
+                Attack();
+            }
         }
 
 
@@ -93,22 +97,13 @@ public class EnemyController : MonoBehaviour
         healthBarEnemy.setHealthEnemy(enemyManager.heath);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "FootR")
-        {
-            enemyManager.heath -= 5;
-            rbenemy.velocity = -Vector3.forward * 100.0f;
-            Debug.Log("Collision Foot");
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "FootR")
         {
             TakeDamageEnemy(5);
             Debug.Log("Trigger Foot");
-            rbenemy.velocity = -Vector3.forward * 100.0f;
+            rbenemy.AddForce(-Vector3.forward * 10000.0f * Time.deltaTime);
 
         }
     }

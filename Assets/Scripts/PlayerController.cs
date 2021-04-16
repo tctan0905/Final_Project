@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public GameObject checkgameScreen;
     public Text txtcheckGame;
-    public GameObject footR;
+    public GameObject[] footR = new GameObject[6];
     Quaternion startRotation;
     void Start()
     {
@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
         isDead = true;
         startPosition = transform.position;
         checkgameScreen.SetActive(false);
-        footR.SetActive(false);
+        for(int i =0;i<footR.Length;i++)
+            footR[i].SetActive(false);
         startRotation = transform.rotation;
     }
     void fixedUpate()
@@ -156,7 +157,8 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("TriggerMelee");
             efx_Attack.Play();
-            footR.SetActive(true);
+            for (int i = 0; i < footR.Length; i++)
+                footR[i].SetActive(true);
             StartCoroutine(isAttack());
             //_nextTimeAttack += _timeAttack;
             isattack = false;
@@ -219,7 +221,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         isattack = true;
-        footR.SetActive(false);
+        for (int i = 0; i < footR.Length; i++)
+            footR[i].SetActive(false);
 
     }
 
@@ -243,6 +246,7 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         transform.rotation = startRotation;
         checkgameScreen.SetActive(false);
-        footR.SetActive(false);
+        for (int i = 0; i < footR.Length; i++)
+            footR[i].SetActive(false);
     }
 }

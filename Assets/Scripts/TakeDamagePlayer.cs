@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class TakeDamagePlayer : MonoBehaviour
 {
-    private EnemyHeathManager enemyManager;
+    EnemyHeathManager enemyManager;
     PlayerController playerHealth;
     Transform target;
+    public GameObject enemytarget;
     private void OnEnable()
     {
         target = PlayerManager.instance.player.transform;
+        enemyManager = enemytarget.GetComponent<EnemyHeathManager>();
         playerHealth = target.GetComponent<PlayerController>();
-        enemyManager = GetComponent<EnemyHeathManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
