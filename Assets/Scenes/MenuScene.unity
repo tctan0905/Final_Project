@@ -509,6 +509,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84ca2b35ce5a8041968bda8fe033585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Host: 127.0.0.1
+  TcpPort: 9933
+  UdpPort: 9933
+  Zone: BasicExamples
+  nameInput: {fileID: 0}
+  loginButton: {fileID: 0}
+  errorText: {fileID: 0}
+  loginPanel: {fileID: 0}
+  roomPanel: {fileID: 0}
+  roomList: {fileID: 0}
+  roomListContent: {fileID: 0}
 --- !u!4 &248347426
 Transform:
   m_ObjectHideFlags: 0
@@ -7470,7 +7481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1628545328
 RectTransform:
   m_ObjectHideFlags: 0
